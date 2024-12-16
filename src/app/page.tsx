@@ -1,27 +1,17 @@
-"use client";
+
 import { CartButton } from "@/components/CartButton";
 import { ProductCard } from "@/components/ProductCard";
-import { useEffect, useState } from "react";
+
 import { CartModal } from "@/components/CartModal";
 
 async function getProducts() {
-  const res = await (await fetch("/api/shopify", { method: "POST" })).json();
+  const rootUrl = process.env.NEXT_PUBLIC_APP_URL;
+  const res = await (await fetch(`${rootUrl}/api/shopify`, { method: "POST" })).json();
   return res || [];
 }
 
-export default function Home() {
-  const [products, setProducts] = useState<any>([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const p = await getProducts();
-
-      setProducts(p);
-      return p;
-    };
-
-    fetchProducts();
-  }, []);
+export default async function Home() {
+  const products = await getProducts()
 
   return (
     <div className="">
