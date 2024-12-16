@@ -55,7 +55,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <button 
           onClick={() => {
             console.log("clicked")
-            addItem(product)
+            addItem(product as any)
         }}
           className="w-full bg-gray-500 rounded-md py-2 text-white"
         >
